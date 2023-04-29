@@ -12,4 +12,3 @@ def get_image(text):
     w, h = font_regular.getsize("Market")
     draw.text((W - w - 10, 278), "Market", font=font_regular, fill=(255, 255, 255, 255))
     blank.save(f"/Users/matvejdoroshenko/rendering_bot/tgbot/funcs/drawn_image.png", "PNG")
-    return open(f"/Users/matvejdoroshenko/rendering_bot/tgbot/funcs/drawn_image.png", "rb")
