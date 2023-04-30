@@ -1,10 +1,57 @@
+import os
+
 from aiogram import Dispatcher
-from aiogram.types import Message
+from aiogram.dispatcher import FSMContext
+from aiogram.types import Message, InputFile
+
+from db_module.db import Database
+
+from tgbot.funcs.image_generator import get_image
 
 
-async def user_start(message: Message):
-    await message.reply("Hello, user!")
+async def user_start(message: Message, state: FSMContext):
+    try:
+        if message.chat.id == Database().select_user(user_id=message.chat.id)[0]:
+            text = ("Пример запроса: \n", "example1", "example2", "example3")
+            await state.set_state("get_image")
+            await message.answer_photo(InputFile("/Users/matvejdoroshenko/rendering_bot/tgbot/handlers/instruction.png"),
+                                       caption="\n".join(text))
+    except TypeError:
+        await state.set_state("get_code")
+        await message.answer("Введите код доступа: ")
+
+
+async def get_code(message: Message, state: FSMContext):
+    text = ("Пример запроса: \n",
+            "example1",
+            "example2",
+            "example3")
+    if message.text == "yxUh`N?~>4'49N_E":
+        await state.set_state("get_image")
+        Database().add_user(user_id=message.chat.id)
+        await message.answer("Введен верный код!")
+        await message.answer_photo(InputFile("/Users/matvejdoroshenko/rendering_bot/tgbot/handlers/instruction.png"),
+                                   caption="\n".join(text))
+
+
+async def generate_screenshot(message: Message):
+    text = ("Пример запроса: \n",
+            "example1",
+            "example2",
+            "example3")
+    try:
+        get_image(message.text.split("\n"), message.chat.id)
+        await message.answer_photo(InputFile(
+            f'/Users/matvejdoroshenko/rendering_bot/tgbot/funcs/{message.chat.id}_drawn_image.png'))
+        os.remove(f'/Users/matvejdoroshenko/rendering_bot/tgbot/funcs/{message.chat.id}_drawn_image.png')
+        await message.answer_photo(InputFile("/Users/matvejdoroshenko/rendering_bot/tgbot/handlers/instruction.png"),
+                                   caption="\n".join(text))
+    except IndexError:
+        await message.answer("Вы ввели неправильное кол-во строк!\n"
+                             "Сделайте повторный запрос:")
 
 
 def register_user(dp: Dispatcher):
     dp.register_message_handler(user_start, commands=["start"], state="*")
+    dp.register_message_handler(get_code, state="get_code")
+    dp.register_message_handler(generate_screenshot, state="get_image")
