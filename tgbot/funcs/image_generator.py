@@ -62,4 +62,4 @@ def get_image(text: list, user_id):
     draw.text((W - w - 10, 544), ratio, font=font, fill=(255, 255, 255, 255))
     w, h = font.getsize(text[15])
     draw.text((W - w - 10, 568), text[15], font=font, fill=(255, 255, 255, 255))
-    blank.save(f"/Users/matvejdoroshenko/rendering_bot/tgbot/funcs/{user_id}_drawn_image.png", "PNG")
+    blank.save(f'/var/tgbot/tgbot/funcs/{user_id}_drawn_image.png', "PNG")
