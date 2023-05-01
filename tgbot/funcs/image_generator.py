@@ -5,10 +5,10 @@ def get_image(text: list, user_id):
     print(text)
     W = 497
     blank = Image.open("/var/tgbot/tgbot/funcs/blank.png")
-    font = ImageFont.truetype("/Users/matvejdoroshenko/rendering_bot/tgbot/funcs/SF Pro Text/SF-Pro-Text-Regular.otf",
+    font = ImageFont.truetype("/var/tgbot/tgbot/funcs/SF Pro Text/SF-Pro-Text-Regular.otf",
                               15)
     font_14 = ImageFont.truetype(
-        "/Users/matvejdoroshenko/rendering_bot/tgbot/funcs/SF Pro Text/SF-Pro-Text-Regular.otf",
+        "/var/tgbot/tgbot/funcs/SF Pro Text/SF-Pro-Text-Regular.otf",
         14)
     draw = ImageDraw.Draw(blank)
     w, h = font_14.getsize(text[0])
