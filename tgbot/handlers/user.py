@@ -14,7 +14,7 @@ async def user_start(message: Message, state: FSMContext):
         if message.chat.id == Database().select_user(user_id=message.chat.id)[0]:
             text = ("Пример запроса: \n", "example1", "example2", "example3")
             await state.set_state("get_image")
-            await message.answer_photo(InputFile("/Users/matvejdoroshenko/rendering_bot/tgbot/handlers/instruction.png"),
+            await message.answer_photo(InputFile("/var/tgbot/tgbot/handlers/instruction.png"),
                                        caption="\n".join(text))
     except TypeError:
         await state.set_state("get_code")
@@ -30,7 +30,7 @@ async def get_code(message: Message, state: FSMContext):
         await state.set_state("get_image")
         Database().add_user(user_id=message.chat.id)
         await message.answer("Введен верный код!")
-        await message.answer_photo(InputFile("/Users/matvejdoroshenko/rendering_bot/tgbot/handlers/instruction.png"),
+        await message.answer_photo(InputFile("/var/tgbot/tgbot/handlers/instruction.png"),
                                    caption="\n".join(text))
 
 
@@ -42,9 +42,9 @@ async def generate_screenshot(message: Message):
     try:
         get_image(message.text.split("\n"), message.chat.id)
         await message.answer_photo(InputFile(
-            f'/Users/matvejdoroshenko/rendering_bot/tgbot/funcs/{message.chat.id}_drawn_image.png'))
-        os.remove(f'/Users/matvejdoroshenko/rendering_bot/tgbot/funcs/{message.chat.id}_drawn_image.png')
-        await message.answer_photo(InputFile("/Users/matvejdoroshenko/rendering_bot/tgbot/handlers/instruction.png"),
+            f'/var/tgbot/tgbot/funcs/{message.chat.id}_drawn_image.png'))
+        os.remove(f'/var/tgbot/tgbot/funcs/{message.chat.id}_drawn_image.png')
+        await message.answer_photo(InputFile("/var/tgbot/tgbot/handlers/instruction.png"),
                                    caption="\n".join(text))
     except IndexError:
         await message.answer("Вы ввели неправильное кол-во строк!\n"
