@@ -4,7 +4,7 @@ from PIL import Image, ImageFont, ImageDraw
 def get_image(text: list, user_id):
     print(text)
     W = 497
-    blank = Image.open("/Users/matvejdoroshenko/rendering_bot/tgbot/funcs/blank.png")
+    blank = Image.open("/var/tgbot/tgbot/funcs/blank.png")
     font = ImageFont.truetype("/Users/matvejdoroshenko/rendering_bot/tgbot/funcs/SF Pro Text/SF-Pro-Text-Regular.otf",
                               15)
     font_14 = ImageFont.truetype(
