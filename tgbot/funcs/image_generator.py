@@ -3,11 +3,11 @@ from PIL import Image, ImageFont, ImageDraw
 
 def get_image_1(text: list, user_id):
     W = 497
-    blank = Image.open("/Users/matvejdoroshenko/rendering_bot/photos/first_screen/blank.png")
-    font = ImageFont.truetype("/Users/matvejdoroshenko/rendering_bot/fonts/SF Pro Text/SF-Pro-Text-Regular.otf",
+    blank = Image.open("/var/tgbot/photos/first_screen/blank.png")
+    font = ImageFont.truetype("/var/tgbot/fonts/SF Pro Text/SF-Pro-Text-Regular.otf",
                               15)
     font_14 = ImageFont.truetype(
-        "/Users/matvejdoroshenko/rendering_bot/fonts/SF Pro Text/SF-Pro-Text-Regular.otf",
+        "/var/tgbot/fonts/SF Pro Text/SF-Pro-Text-Regular.otf",
         14)
     draw = ImageDraw.Draw(blank)
     w, h = font_14.getsize(text[0])
@@ -61,23 +61,23 @@ def get_image_1(text: list, user_id):
     draw.text((W - w - 10, 544), ratio, font=font, fill=(255, 255, 255, 255))
     w, h = font.getsize(text[15])
     draw.text((W - w - 10, 568), text[15], font=font, fill=(255, 255, 255, 255))
-    blank.save(f"/Users/matvejdoroshenko/rendering_bot/photos/first_screen/{user_id}_drawn_image.png", "PNG")
+    blank.save(f"/var/tgbot/photos/first_screen/{user_id}_drawn_image.png", "PNG")
 
 
 def get_image_2(text: list, user_id):
     W = 304
     blank = Image.open("/Users/matvejdoroshenko/rendering_bot/photos/second_screen/template_in_progress.png")
     font_11 = ImageFont.truetype(
-        "/Users/matvejdoroshenko/rendering_bot/fonts/SF Pro Text/SF-Pro-Text-Semibold.otf",
+        "/var/tgbot/fonts/SF Pro Text/SF-Pro-Text-Semibold.otf",
         11)
     font_12 = ImageFont.truetype(
-        "/Users/matvejdoroshenko/rendering_bot/fonts/SF Pro Text/SF-Pro-Text-Semibold.otf",
+        "/var/tgbot/fonts/SF Pro Text/SF-Pro-Text-Semibold.otf",
         12)
     font_15 = ImageFont.truetype(
-        "/Users/matvejdoroshenko/rendering_bot/fonts/SF Pro Text/SF-Pro-Text-Semibold.otf",
+        "/var/tgbot/fonts/SF Pro Text/SF-Pro-Text-Semibold.otf",
         15)
     font_14 = ImageFont.truetype(
-        "/Users/matvejdoroshenko/rendering_bot/fonts/SF Pro Text/SF-Pro-Text-Semibold.otf",
+        "/var/tgbot/fonts/SF Pro Text/SF-Pro-Text-Semibold.otf",
         14)
     draw = ImageDraw.Draw(blank)
     w, h = font_11.getsize(text[0].rsplit()[0])
@@ -95,9 +95,9 @@ def get_image_2(text: list, user_id):
     w, h = font_12.getsize(text[2])
     draw.text((W - w - 100, 18), text[2], font=font_12, fill=(255, 255, 255, 255))
     ticker_name = text[3].replace("/USD", "")
-    ticker = Image.open(f"/Users/matvejdoroshenko/rendering_bot/photos/second_screen/crypto_logos/{ticker_name.upper()}.png").convert("RGBA")
-    ticker.resize((11, 11)).save(f"/Users/matvejdoroshenko/rendering_bot/photos/second_screen/crypto_logos/{ticker_name.upper()}.png")
-    ticker = Image.open(f"/Users/matvejdoroshenko/rendering_bot/photos/second_screen/crypto_logos/{ticker_name.upper()}.png").convert("RGBA")
+    ticker = Image.open(f"/var/tgbot/photos/second_screen/crypto_logos/{ticker_name.upper()}.png").convert("RGBA")
+    ticker.resize((11, 11)).save(f"/var/tgbot/photos/second_screen/crypto_logos/{ticker_name.upper()}.png")
+    ticker = Image.open(f"/var/tgbot/photos/second_screen/crypto_logos/{ticker_name.upper()}.png").convert("RGBA")
     blank.paste(ticker, (212, 20), ticker)
     w, h = font_12.getsize(text[3])
     if len(ticker_name) == 4:
@@ -111,12 +111,12 @@ def get_image_2(text: list, user_id):
     w, h = font_15.getsize(text[6])
     draw.text((W - w + 124, 82), text[6], font=font_15, fill=(255, 255, 255, 255))
     if text[7] == "USD":
-        flag = Image.open("/Users/matvejdoroshenko/rendering_bot/photos/second_screen/flags/usa_flag.png").convert("RGBA")
-        flag.resize((18, 15)).save("/Users/matvejdoroshenko/rendering_bot/photos/second_screen/flags/usa_flag.png")
+        flag = Image.open("/var/tgbot/photos/second_screen/flags/usa_flag.png").convert("RGBA")
+        flag.resize((18, 15)).save("/var/tgbot/photos/second_screen/flags/usa_flag.png")
     elif text[7] == "EUR":
-        flag = Image.open("/Users/matvejdoroshenko/rendering_bot/photos/second_screen/flags/eu_flag.png").convert(
+        flag = Image.open("/var/tgbot/photos/second_screen/flags/eu_flag.png").convert(
             "RGBA")
-        flag.resize((15, 15)).save("/Users/matvejdoroshenko/rendering_bot/photos/second_screen/flags/eu_flag.png")
+        flag.resize((15, 15)).save("/var/tgbot/photos/second_screen/flags/eu_flag.png")
     blank.paste(flag, (383, 109), flag)
     w, h = font_15.getsize(text[7])
     draw.text((W - w + 128, 107), text[7], font=font_15, fill=(255, 255, 255, 255))
@@ -134,4 +134,4 @@ def get_image_2(text: list, user_id):
     draw.text((W - w + 125, 255), text[13], font=font_14, fill=(255, 255, 255, 255))
     w, h = font_15.getsize(text[14])
     draw.text((W - w + 125, 280), text[14], font=font_15, fill=(255, 255, 255, 255))
-    blank.save(f"/Users/matvejdoroshenko/rendering_bot/photos/second_screen/{user_id}_drawn_image.png", "PNG")
+    blank.save(f"/var/tgbot/photos/second_screen/{user_id}_drawn_image.png", "PNG")
