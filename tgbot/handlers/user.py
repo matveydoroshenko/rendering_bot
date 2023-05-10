@@ -37,7 +37,7 @@ async def first_screen_button(call: CallbackQuery, state: FSMContext):
     text = ("Пример запроса: \n", "example1", "example2", "example3")
     await state.set_state("get_image_1")
     await call.message.answer_photo(
-        photo=InputFile("/Users/matvejdoroshenko/rendering_bot/photos/first_screen/instruction.png"),
+        photo=InputFile("/var/tgbot/photos/first_screen/instruction.png"),
         caption="\n".join(text))
 
 
@@ -45,7 +45,7 @@ async def second_screen_button(call: CallbackQuery, state: FSMContext):
     text = ("Пример запроса: \n", "example1", "example2", "example3")
     await state.set_state("get_image_2")
     await call.message.answer_photo(
-        photo=InputFile("/Users/matvejdoroshenko/rendering_bot/photos/second_screen/instruction.png"),
+        photo=InputFile("/var/tgbot/photos/second_screen/instruction.png"),
         caption="\n".join(text))
 
 
@@ -54,8 +54,8 @@ async def generate_screenshot_1(message: Message):
     try:
         get_image_1(message.text.split("\n"), message.chat.id)
         await message.answer_photo(InputFile(
-            f'/Users/matvejdoroshenko/rendering_bot/photos/first_screen/{message.chat.id}_drawn_image.png'))
-        os.remove(f'/Users/matvejdoroshenko/rendering_bot/photos/first_screen/{message.chat.id}_drawn_image.png')
+            f'/var/tgbot/photos/first_screen/{message.chat.id}_drawn_image.png'))
+        os.remove(f'/var/tgbot/photos/first_screen/{message.chat.id}_drawn_image.png')
         await message.answer("Выбери скрин:", reply_markup=main_keyboard())
     except IndexError:
         await message.answer("Вы ввели неправильное кол-во строк!\n"
@@ -67,8 +67,8 @@ async def generate_screenshot_2(message: Message):
     try:
         get_image_2(message.text.split("\n"), message.chat.id)
         await message.answer_photo(InputFile(
-            f'/Users/matvejdoroshenko/rendering_bot/photos/second_screen/{message.chat.id}_drawn_image.png'))
-        os.remove(f'/Users/matvejdoroshenko/rendering_bot/photos/second_screen/{message.chat.id}_drawn_image.png')
+            f'/var/tgbot/photos/second_screen/{message.chat.id}_drawn_image.png'))
+        os.remove(f'/var/tgbot/photos/second_screen/{message.chat.id}_drawn_image.png')
         await message.answer("Выбери скрин:", reply_markup=main_keyboard())
     except IndexError:
         await message.answer("Вы ввели неправильное кол-во строк!\n"
